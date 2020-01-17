@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DailyHourValidation</fullName>
+    <active>true</active>
+    <description>Daily hours can&#39;t exceed 24 hours.</description>
+    <errorConditionFormula>Monday__c &gt; 24  ||Thursday__c &gt; 24 || Tuesday__c &gt; 24 ||Wednesday__c &gt; 24 ||Friday__c &gt; 24</errorConditionFormula>
+    <errorMessage>Daily hours can&#39;t exceed 24 hours</errorMessage>
+</ValidationRule>

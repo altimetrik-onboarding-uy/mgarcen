@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent when gross is over $2000</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>EmailAlertTimesheet</name>
+    <style>none</style>
+    <subject>Timesheet notification</subject>
+    <textOnly>Employee: {!Contact.FirstName}  {!Contact.LastName} 
+Timesheet Type: {!Timesheet__c.RecordType} 
+{!relatedTo.Description__c}
+Start Date: {!Timesheet__c.Start_Date__c}
+End Date: {!Timesheet__c.End_Date__c}  
+
+Time entry
+
+Monday  {!Timesheet__c.Monday__c} 
+Tuesday  {!Timesheet__c.Tuesday__c} 
+Wednesday  {!Timesheet__c.Wednesday__c} 
+Thursday  {!Timesheet__c.Thursday__c} 
+Friday  {!Timesheet__c.Friday__c}
+
+Rate 
+
+Hour rate: {!Timesheet__c.Hour_Rate__c}
+Gross Pay: {!Timesheet__c.Gross_Pay__c}
+Taxes: {!Timesheet__c.Hour_Taxes}
+Comments: {!Timesheet__c.Comments} 
+
+Timesheet Status 
+{!Timesheet__c.Status__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
