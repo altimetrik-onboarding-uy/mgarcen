@@ -1,0 +1,23 @@
+<h3>General Information</h3>
+<p>Employee: {!Timesheet__c.EmployeeFullName__c} </p>
+<p>Timesheet Type: {!Timesheet__c.RecordType}</p>
+<p>{!Timesheet__c.Description__c}</p>
+<p>Start Date: {!Timesheet__c.Start_Date__c}</p>
+<p>End Date: {!Timesheet__c.End_Date__c}</p>
+
+<h3>Time entry</h3>
+
+<p>Monday  {!Timesheet__c.Monday__c}</p>
+<p>Tuesday  {!Timesheet__c.Tuesday__c}</p>
+<p>Wednesday  {!Timesheet__c.Wednesday__c}</p>
+<p>Thursday  {!Timesheet__c.Thursday__c}</p>
+<p>Friday  {!Timesheet__c.Friday__c}</p>
+
+<h3>Rate</h3>
+
+<p>Hour rate: {!Timesheet__c.Hour_Rate__c}</p>
+<p>Gross Pay: {!Timesheet__c.Gross_Pay__c} </p>
+<p>Comments: {!Timesheet__c.Comments}</p>
+
+<h3><p>Timesheet Status </p></h3>
+<p>{!Timesheet__c.Status__c}</p>
