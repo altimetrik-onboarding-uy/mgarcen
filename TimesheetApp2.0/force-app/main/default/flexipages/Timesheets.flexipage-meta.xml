@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
-        <name>top</name>
+        <name>region1</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <name>bottomLeft</name>
+        <name>region2</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <name>bottomRight</name>
+        <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
-    <flexiPageRegions>
-        <name>sidebar</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <masterLabel>HomePageAppDefault</masterLabel>
+    <masterLabel>Timesheets</masterLabel>
     <template>
-        <name>home:desktopTemplate</name>
+        <name>flexipage:appHomeTemplateTwoColumnsStacked</name>
     </template>
-    <type>HomePage</type>
+    <type>AppPage</type>
 </FlexiPage>

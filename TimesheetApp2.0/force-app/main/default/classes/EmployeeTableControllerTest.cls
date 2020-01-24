@@ -1,6 +1,6 @@
 @isTest
-public class TestTimesheetProcessingBatch {
-  @testSetup 
+public class EmployeeTableControllerTest {
+@testSetup 
     static void setup() {
         List<Timesheet__c> timesheets = new List<Timesheet__c>();
         Contact contact = new Contact(firstname='first', 
@@ -12,12 +12,18 @@ public class TestTimesheetProcessingBatch {
         insert timesheets;
        
     }
-    static testmethod void test() {        
+      static testmethod void testGetTotalTimesheets() {        
         Test.startTest();
-        TimesheetProcessingBatch timesheetprocessingbatch = new TimesheetProcessingBatch();
-        Database.executeBatch(timesheetprocessingbatch,200);
+        List<Timesheet__c>  testList = EmployeeTableController.getTotalTimesheets();
         Test.stopTest();
        
-        System.assertEquals(200, [select count() from Timesheet__c where Comments__c = 'Test' and Timesheet_Status__c='SUBMITTED' ]);
+        System.assert(testList!=Null);
+    }
+       static testmethod void testGetRecentTimesheets() {        
+        Test.startTest();
+        List<List<Timesheet__c>>  testRecentList = EmployeeTableController.getRecent();
+        Test.stopTest();
+       
+        System.assert(testRecentList!=Null);
     }
 }
