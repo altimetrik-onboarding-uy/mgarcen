@@ -1,0 +1,69 @@
+<template>
+    <td if:false={recent}> 
+        <a  title=" " data-target-id={timesheet.Employee__c} onclick={openmodal}  target="_blank">{timesheet.Employee__r.Name}</a>
+    </td>
+    <td if:true={recent}> 
+        <a  title=" " data-target-id={timesheet.Employee__c} onclick={openmodal}  target="_blank">{timesheet.EmployeeName}</a>
+    </td>
+    
+        <td if:false={recent}><lightning-formatted-date-time value={timesheet.Employee__r.Birthdate} year="numeric" day="2-digit" month="long" timezone="UTC" ></lightning-formatted-date-time></td>  
+        <td if:true={recent}><lightning-formatted-date-time value={timesheet.EmployeeBirthdate} year="numeric" day="2-digit" month="long" timezone="UTC" ></lightning-formatted-date-time></td>  
+
+        <td><lightning-formatted-date-time value={timesheet.Start_Date__c}   year="numeric" day="numeric" month="numeric" timezone="UTC" ></lightning-formatted-date-time></td> 
+        <td><lightning-formatted-date-time value={timesheet.End_Date__c}   year="numeric" day="numeric" month="numeric" timezone="UTC" ></lightning-formatted-date-time></td> 
+        <td>{timesheet.Gross_Pay__c}</td> 
+        <td>{timesheet.Total_Week_Hours__c}</td> 
+        <td>{timesheet.Taxes__c}</td>
+        <td if:false={recent}>{timesheet.RecordType.Name}</td>
+        <td if:true={recent}>{timesheet.Type}</td>
+        <td>{timesheet.Submitted__c}</td>
+        
+        <td><div><a data-target={index} data-target-id={timesheet.Id}  onclick={navigateToRecordViewPage} onmouseenter={handleMouseHover} onmouseout={handleMouseOut} >Details</a>
+            
+                <template if:true={togglehover}>
+                    <div role="tooltip" style="position: absolute; right: 30px; bottom: 100%; width: 22rem; padding: inherit;">
+                        <lightning-card title={cardTitle} icon-name="custom:custom101">
+
+                            <p if:false={recent}>Employee: {timesheet.Employee__r.Name}</p>  <p if:true={recent}>Employee: {timesheet.EmployeeName}</p>
+                        
+                            <p slot="footer"> </p>
+                        </lightning-card>                                            
+                    </div>
+                </template> 
+            </div>                               
+    </td>
+        
+
+    <template if:true={openmodel}>
+        <div class="" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" size="medium">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit your Employee Data</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <lightning-record-edit-form record-id={employeeId} object-api-name="Contact"  onsubmit={handleSubmit}>
+                <lightning-messages>
+                </lightning-messages>
+            
+                 <lightning-input-field field-name="FirstName">
+                 </lightning-input-field>
+            <lightning-input-field field-name="LastName">
+            </lightning-input-field>
+            <lightning-input-field field-name="Email">
+            </lightning-input-field>
+            <lightning-button class="slds-m-top_small" variant="brand" type="submit" name="update"   label="Update">
+                </lightning-button>
+                </lightning-record-edit-form>
+            </div>           
+        </div>
+    </section>
+        
+        </div>
+        </template>
+</template>

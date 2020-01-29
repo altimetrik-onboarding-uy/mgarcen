@@ -1,0 +1,58 @@
+<template>
+    <lightning-layout>
+<lightning-tabset >
+<lightning-tab label="Total Timesheets" onactive={handleTotal} >
+    <table class="slds-table slds-table slds-table_cell-buffer slds-table--striped" >  
+        <thead>
+          
+        <template for:each={columns} for:item="col">
+           
+            <th key={col} scope="row">
+                    {col} 
+                </th>
+          
+        </template>
+     
+</thead>
+<tbody>
+   
+    <template for:each={timesheets} for:item="timesheet">
+      
+        <c-row-l-w-c style=" display: table-row;" key={timesheet.Id} recent={recentList} timesheet={timesheet}>
+    
+        </c-row-l-w-c>  
+      
+    </template>
+ 
+</tbody>
+</table>
+</lightning-tab>
+
+    <lightning-tab label="Recent Timesheets" onactive={handleRecent}>
+        <table class="slds-table slds-table slds-table_cell-buffer slds-table--striped">  
+            <thead>
+        <tr class="slds-line-height_reset">   
+            <template for:each={columns} for:item="col">
+                <th key={col}>
+                        {col} 
+                    </th>
+            </template>
+        </tr>    
+    </thead>
+    <tbody>
+       
+        <template for:each={recentTimesheets} for:item="timesheet">
+          
+                <c-row-l-w-c style=" display: table-row;" key={timesheet.Id} recent={recentList} timesheet={timesheet}>
+    
+                </c-row-l-w-c>    
+          
+        </template>
+     
+    </tbody>
+    </table>
+    </lightning-tab>
+
+</lightning-tabset>
+</lightning-layout>
+</template>
