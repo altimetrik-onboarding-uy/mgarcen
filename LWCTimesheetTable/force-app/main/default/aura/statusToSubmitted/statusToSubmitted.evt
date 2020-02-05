@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Object to update status" >
+        <aura:attribute type="String" name="timesheetId"></aura:attribute>
+   
+          </aura:event>

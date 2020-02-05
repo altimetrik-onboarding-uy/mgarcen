@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:registerEvent name="filterEvent" type="c:filterEvent"/>
+    <aura:registerEvent name="submitButton" type="c:submitButton"/>
+    
+    <article class="slds-card">
+        
+        <div class="slds-card__body slds-card__body_inner">
+            
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>All
+                        <ui:inputCheckbox aura:id="allFilter" value="false" change="{!c.filterSelected}" /></span>
+                </div>
+                <div class="slds-col">
+                    <span> Submitted
+                        <ui:inputCheckbox aura:id="submittedFilter" value="false" change="{!c.filterSelected}" /></span>
+                </div>
+                <div class="slds-col">
+                    <span>  Not Submitted
+                        <ui:inputCheckbox aura:id="notSubmittedFilter" value="false" change="{!c.filterSelected}" /></span>
+                </div>
+                <div class="slds-col">
+                    <span>
+                        <lightning:button label="Submit selected timesheets" title="" onclick="{! c.onSubmit }"/>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+        
+    </article>
+    
+</aura:component>

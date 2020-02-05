@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="EmployeeTableController">
+    <aura:attribute type="Timesheet__c[]" name="timesheetList"/>
+    <aura:attribute type="Timesheet__c[]" name="recentTimesheetList"/>
+    
+    <aura:attribute type="Timesheet__c[]" name="submittedTimesheetList"/>
+    <aura:attribute type="Timesheet__c[]" name="notSubmittedTimesheetList"/>
+    <aura:attribute type="Timesheet__c[]" name="bothTimesheetList"/>
+    <aura:attribute type="Timesheet__c[]" name="filteredList"/>
+    
+    <aura:attribute type="boolean" name="recent" default="false"/>
+
+    
+    <aura:attribute type="List" name="listToSubmit"/>
+    <aura:attribute type="String[]" name="columns" default="Employee Name,Birthdate,Start Date,End Date,Gross Pay,Taxes,Total Hours,Record Type,Submitted,Record Page"/>
+      <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:handler name="statusToSubmitted" event="c:statusToSubmitted" action="{!c.addToSubList}"/>
+    <aura:handler name="filterEvent" event="c:filterEvent" action="{!c.onCheck}"/>    
+    <aura:handler name="submitButton" event="c:submitButton" action="{!c.submitSelected}"/>  
+    
+    <lightning:tabset   aura:id="Tabs"  >  
+
+        <lightning:tab  label="Timesheets" id="timesheetsTab" onactive="{!c.totalTab}"  >
+            <c:tableFilters/>
+         <c:EmployeeTableComponent columns="{!v.columns}" timesheetList="{!v.filteredList}"/>
+        </lightning:tab>
+        
+        <lightning:tab  label="Recent Timesheets" id="recentTab" onactive="{!c.recentTab}"> 
+            <c:tableFilters/>
+            <c:EmployeeTableComponent columns="{!v.columns}" timesheetList="{!v.filteredList}"/>
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

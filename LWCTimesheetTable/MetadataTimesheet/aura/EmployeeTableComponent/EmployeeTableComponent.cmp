@@ -1,54 +1,26 @@
 <aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="EmployeeTableController">
     <!-- attributes -->
-    <aura:attribute type="Timesheet__c[]" name="timesheetList"/>
-    <aura:attribute type="Timesheet__c[]" name="recentTimesheetList"/>
-    <aura:attribute type="String[]" name="columns" default="Employee Name,Birthdate,Start Date,End Date,Gross Pay,Taxes,Total Hours,Record Type,Submitted,Record Page"/>
-    <aura:attribute type="boolean" name="recentList" default="false"/>
     
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-
-    <lightning:tabset>
-        <lightning:tab onactive="{! c.handleTimesheetsTab }" label="Timesheets" id="timesheetsTab" > 
-            <table class="slds-table slds-table slds-table_cell-buffer slds-table--striped">
+    <aura:attribute type="Timesheet__c[]" name="timesheetList"/>
+    <aura:attribute type="String[]" name="columns" />
+    
+    <!-- Filter Attributes -->
+   
+            <table  class="slds-table slds-table slds-table_cell-buffer slds-table--striped">
                 <thead>
                     <tr>
+                        <th class="slds-text-align_right" scope="col" style="width:3.25rem">      
+                            <p>Select</p>                           
+                        </th> 
                         <aura:iteration items="{!v.columns}" var="column" >
                             <th >{!column}</th>
                         </aura:iteration>
                     </tr> 
                 </thead>
                 <tbody>
-                    <aura:iteration items="{!v.timesheetList}" var="timesheet" >
-                        
-                        <tr>   <c:EmployeeTableComponentRow timesheet="{!timesheet}" recent="{!v.recentList}"/></tr>
-                        
+                    <aura:iteration items="{!v.timesheetList}" var="timesheet" >                
+                        <tr>   <c:EmployeeTableComponentRow timesheet="{!timesheet}"/></tr>               
                     </aura:iteration>
                 </tbody>
-            </table>
-            
-        </lightning:tab>
-        
-        <lightning:tab  onactive="{! c.handleRecentTab }" label="Recent Timesheets" id="recentTab"> 
-            <table class="slds-table slds-table slds-table_cell-buffer slds-table--striped">
-                 <thead>
-                    <tr>
-                        <aura:iteration items="{!v.columns}" var="column" >
-                            <th >{!column}</th>
-                        </aura:iteration>
-                    </tr> 
-                </thead>
-                <tbody>
-                    <aura:iteration items="{!v.recentTimesheetList}" var="timesheet" >
-                        
-                        <tr>   <c:EmployeeTableComponentRow timesheet="{!timesheet}" recent="{!v.recentList}" /></tr>
-                        
-                    </aura:iteration>
-                </tbody>
-            </table>
-            
-        </lightning:tab>
-        
-    </lightning:tabset>
-    
-    
+            </table>  
 </aura:component>
