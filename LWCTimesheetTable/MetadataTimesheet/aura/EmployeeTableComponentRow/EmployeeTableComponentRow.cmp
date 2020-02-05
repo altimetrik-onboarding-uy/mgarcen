@@ -1,0 +1,89 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="EmployeeTableController">
+    
+    <aura:attribute type="Timesheet__c" name="timesheet"/>
+    <aura:attribute type="boolean" name="modal" default='false'/>
+    <aura:attribute type="String" name="employeeId" default=' '/>
+    <aura:attribute name="togglehover" type="boolean" default="false"/>
+    
+    <aura:registerEvent name="statusToSubmitted" type="c:statusToSubmitted"/>
+    
+    <td class="slds-text-align_right" role="gridcell">
+        <ui:inputCheckbox aura:id="selected" value="{!v.allSelected}" change="{!c.onCheck}" />
+    </td> 
+    <th scope="row">  
+        <div class="slds-truncate" title="Name"><a name="{!v.timesheet.Employee__c}" href=" javascript:void(0);"  onclick="{!c.openModal}"><ui:outputText value ="{!v.timesheet.EmployeeName}"/></a></div>              
+    </th>  
+    <td role="gridcell"><div class="slds-truncate" title="name"><lightning:formattedDateTime value="{!v.timesheet.EmployeeBirthdate}" year="numeric" day="2-digit" month="long" timeZone="UTC" /></div></td>   
+    <td role="gridcell"><div class="slds-truncate" title="name"><lightning:formattedDateTime value="{!v.timesheet.Start_Date__c}" year="numeric" day="numeric" month="numeric" timeZone="UTC" /></div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name"><lightning:formattedDateTime value="{!v.timesheet.End_Date__c}" year="numeric" day="numeric" month="numeric" timeZone="UTC" /></div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name">{!v.timesheet.Gross_Pay__c}</div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name">{!v.timesheet.Total_Week_Hours__c}</div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name">{!v.timesheet.Taxes__c}</div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name">{!v.timesheet.Type}</div></td>
+    <td role="gridcell"><div class="slds-truncate" title="name">{!v.timesheet.Submitted__c}</div></td>
+    <td role="gridcell"><div class="slds-truncate" title=" " style="text-align: center">
+        <a href="{!'/'+v.timesheet.Id}" onmouseenter="{!c.handleMouseHover}" onmouseout="{!c.handleMouseOut}">Details</a>                                  
+        
+        <aura:if isTrue="{!v.togglehover==true}">
+            <div role="tooltip" id="help" style="position: absolute; right: 30px; bottom: 100%; width: 22rem; padding: inherit;">
+                
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">                           
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">                                   
+                                    <span>Employee</span>                                
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                            {!v.timesheet.EmployeeName}
+                        </div>
+                    <footer class="slds-card__footer">
+                        <span class="slds-assistive-text"> </span>
+                    </footer>
+                </article>
+                
+                
+            </div>
+        </aura:if>                                
+        </div> 
+    </td>
+    
+    <aura:if isTrue="{!v.modal}">
+        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">   
+                <header class="slds-modal__header">
+                    <h1>Edit your employee data</h1>
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModal }"
+                                          alternativeText="close"
+                                          variant="border-filled"
+                                          class="slds-modal__close"/>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    <lightning:recordEditForm
+                                              onload="{!c.handleLoad}"
+                                              onsubmit="{!c.handleSubmit}"
+                                              onsuccess="{!c.handleSuccess}"
+                                              recordId="{!v.employeeId}"
+                                              objectApiName="Contact">
+                        
+                        <lightning:inputField fieldName="Name" />
+                        <lightning:inputField fieldName="Birthdate" />
+                        <lightning:inputField fieldName="Email" />
+                        <lightning:inputField fieldName="MobilePhone" />
+                        <div class="slds-m-top_medium">
+                            <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                        </div>
+                    </lightning:recordEditForm>
+                </div>  
+            </div>
+        </section>
+    </aura:if> 
+    
+</aura:component>

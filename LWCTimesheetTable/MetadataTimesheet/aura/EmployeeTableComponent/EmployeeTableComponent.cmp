@@ -1,0 +1,26 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="EmployeeTableController">
+    <!-- attributes -->
+    
+    <aura:attribute type="Timesheet__c[]" name="timesheetList"/>
+    <aura:attribute type="String[]" name="columns" />
+    
+    <!-- Filter Attributes -->
+   
+            <table  class="slds-table slds-table slds-table_cell-buffer slds-table--striped">
+                <thead>
+                    <tr>
+                        <th class="slds-text-align_right" scope="col" style="width:3.25rem">      
+                            <p>Select</p>                           
+                        </th> 
+                        <aura:iteration items="{!v.columns}" var="column" >
+                            <th >{!column}</th>
+                        </aura:iteration>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.timesheetList}" var="timesheet" >                
+                        <tr>   <c:EmployeeTableComponentRow timesheet="{!timesheet}"/></tr>               
+                    </aura:iteration>
+                </tbody>
+            </table>  
+</aura:component>
